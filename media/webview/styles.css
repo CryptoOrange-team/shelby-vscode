@@ -1,0 +1,279 @@
+/* Shelby Blob Browser — Webview Styles */
+/* Uses VS Code CSS variables for theme compatibility */
+
+:root {
+  --shelby-accent: var(--vscode-button-background, #007acc);
+  --shelby-fg: var(--vscode-editor-foreground, #cccccc);
+  --shelby-bg: var(--vscode-editor-background, #1e1e1e);
+  --shelby-border: var(--vscode-panel-border, #3c3c3c);
+  --shelby-input-bg: var(--vscode-input-background, #3c3c3c);
+  --shelby-input-fg: var(--vscode-input-foreground, #cccccc);
+  --shelby-error: var(--vscode-errorForeground, #f48771);
+  --shelby-radius: 6px;
+  --shelby-gap: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--vscode-font-family, system-ui, sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+  color: var(--shelby-fg);
+  background: var(--shelby-bg);
+  padding: var(--shelby-gap);
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ── Tabs ─────────────────────────────────────── */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--shelby-border);
+  margin-bottom: var(--shelby-gap);
+  padding-bottom: 0;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--vscode-tab-inactiveForeground, #999);
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: var(--shelby-fg);
+}
+
+.tab.active {
+  color: var(--shelby-accent);
+  border-bottom-color: var(--shelby-accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ── Toolbar ──────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: var(--shelby-gap);
+}
+
+.account-picker {
+  flex: 1;
+  max-width: 300px;
+}
+
+/* ── Form Elements ────────────────────────────── */
+
+select,
+input[type="text"],
+input[type="number"] {
+  background: var(--shelby-input-bg);
+  color: var(--shelby-input-fg);
+  border: 1px solid var(--shelby-border);
+  border-radius: var(--shelby-radius);
+  padding: 6px 10px;
+  font: inherit;
+  outline: none;
+}
+
+select:focus,
+input:focus {
+  border-color: var(--shelby-accent);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--shelby-border);
+  border-radius: var(--shelby-radius);
+  background: var(--vscode-button-secondaryBackground, #3c3c3c);
+  color: var(--vscode-button-secondaryForeground, #ccc);
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.15s;
+}
+
+.btn:hover {
+  background: var(--vscode-button-secondaryHoverBackground, #4c4c4c);
+}
+
+.btn.primary {
+  background: var(--shelby-accent);
+  color: var(--vscode-button-foreground, #fff);
+  border-color: var(--shelby-accent);
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Blob Grid ────────────────────────────────── */
+
+.blob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--shelby-gap);
+}
+
+.blob-card {
+  border: 1px solid var(--shelby-border);
+  border-radius: var(--shelby-radius);
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.blob-card:hover {
+  border-color: var(--shelby-accent);
+  background: var(--vscode-list-hoverBackground, #2a2d2e);
+}
+
+.blob-card .name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.blob-card .meta {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground, #999);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.placeholder {
+  padding: 24px;
+  color: var(--vscode-descriptionForeground, #999);
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground, #999);
+}
+
+/* ── Upload Zone ──────────────────────────────── */
+
+.upload-zone {
+  border: 2px dashed var(--shelby-border);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--shelby-accent);
+  background: var(--vscode-list-hoverBackground, #2a2d2e);
+}
+
+.upload-form {
+  margin-top: var(--shelby-gap);
+}
+
+.form-group {
+  margin-bottom: var(--shelby-gap);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  max-width: 400px;
+}
+
+progress {
+  width: 100%;
+  max-width: 400px;
+  height: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+progress::-webkit-progress-bar {
+  background: var(--shelby-input-bg);
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-value {
+  background: var(--shelby-accent);
+  border-radius: 4px;
+}
+
+/* ── Config Card ──────────────────────────────── */
+
+.config-card {
+  border: 1px solid var(--shelby-border);
+  border-radius: var(--shelby-radius);
+  padding: 16px;
+}
+
+.config-card .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--shelby-border);
+}
+
+.config-card .row:last-child {
+  border-bottom: none;
+}
+
+.config-card .label {
+  color: var(--vscode-descriptionForeground, #999);
+}
+
+/* ── Error Banner ─────────────────────────────── */
+
+.error-banner {
+  background: var(--vscode-inputValidation-errorBackground, #5a1d1d);
+  color: var(--shelby-error);
+  padding: 8px 12px;
+  border-radius: var(--shelby-radius);
+  margin-bottom: var(--shelby-gap);
+  display: none;
+}
+
+.error-banner.visible {
+  display: block;
+}

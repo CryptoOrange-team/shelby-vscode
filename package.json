@@ -1,0 +1,363 @@
+{
+  "name": "shelby-vscode",
+  "displayName": "Shelby",
+  "description": "Decentralized hot storage for Web3 — upload, download, and browse blobs on the Shelby network. Ed25519 keys secured via OS-level encryption.",
+  "version": "0.2.0",
+  "publisher": "shelby-protocol",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shelby/shelby-vscode"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "shelby",
+    "blockchain",
+    "decentralized storage",
+    "aptos",
+    "web3",
+    "blob storage"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "shelby.upload",
+        "title": "Shelby: Upload Blob",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.download",
+        "title": "Shelby: Download Blob",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.listBlobs",
+        "title": "Shelby: List Blobs",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.deleteBlob",
+        "title": "Shelby: Delete Blob",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.refreshTree",
+        "title": "Shelby: Refresh Explorer",
+        "category": "Shelby",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "shelby.init",
+        "title": "Shelby: Initialize Config",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.configureAccount",
+        "title": "Shelby: Configure Account",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.connect",
+        "title": "Shelby: Connect",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.disconnect",
+        "title": "Shelby: Disconnect",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.switchNetwork",
+        "title": "Shelby: Switch Network",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.faucet",
+        "title": "Shelby: Faucet (Testnet Tokens)",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.copyUrl",
+        "title": "Shelby: Copy Blob URL",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.verifyIntegrity",
+        "title": "Shelby: Verify Blob Integrity",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.openBrowser",
+        "title": "Shelby: Open Blob Browser",
+        "category": "Shelby"
+      },
+      {
+        "command": "shelby.validateConfig",
+        "title": "Shelby: Validate Configuration",
+        "category": "Shelby"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "shelby.upload",
+        "key": "ctrl+alt+s u",
+        "mac": "cmd+alt+s u",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "shelby.download",
+        "key": "ctrl+alt+s d",
+        "mac": "cmd+alt+s d",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "shelby.listBlobs",
+        "key": "ctrl+alt+s l",
+        "mac": "cmd+alt+s l"
+      },
+      {
+        "command": "shelby.openBrowser",
+        "key": "ctrl+alt+s b",
+        "mac": "cmd+alt+s b"
+      },
+      {
+        "command": "shelby.refreshTree",
+        "key": "ctrl+alt+s r",
+        "mac": "cmd+alt+s r"
+      },
+      {
+        "command": "shelby.switchNetwork",
+        "key": "ctrl+alt+s n",
+        "mac": "cmd+alt+s n"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "shelby.upload",
+          "when": "resourceScheme == file",
+          "group": "shelby@1"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "shelby.upload",
+          "when": "editorHasSelection",
+          "group": "shelby@1"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "shelby.refreshTree",
+          "when": "view == shelby.tree",
+          "group": "navigation@1"
+        },
+        {
+          "command": "shelby.connect",
+          "when": "view == shelby.tree",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "shelby.configureAccount",
+          "when": "view == shelby.tree && viewItem == shelby.accountsRoot",
+          "group": "inline"
+        },
+        {
+          "command": "shelby.listBlobs",
+          "when": "view == shelby.tree && viewItem == shelby.account",
+          "group": "shelby@1"
+        },
+        {
+          "command": "shelby.upload",
+          "when": "view == shelby.tree && viewItem == shelby.account",
+          "group": "shelby@2"
+        },
+        {
+          "command": "shelby.download",
+          "when": "view == shelby.tree && viewItem == shelby.blob",
+          "group": "shelby@1"
+        },
+        {
+          "command": "shelby.deleteBlob",
+          "when": "view == shelby.tree && viewItem == shelby.blob",
+          "group": "shelby@2"
+        },
+        {
+          "command": "shelby.copyUrl",
+          "when": "view == shelby.tree && viewItem == shelby.blob",
+          "group": "shelby@3"
+        },
+        {
+          "command": "shelby.verifyIntegrity",
+          "when": "view == shelby.tree && viewItem == shelby.blob",
+          "group": "shelby@4"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "shelby-sidebar",
+          "title": "Shelby",
+          "icon": "media/shelby-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "shelby-sidebar": [
+        {
+          "id": "shelby.tree",
+          "name": "Blob Explorer"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Shelby",
+      "properties": {
+        "shelby.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for Shelby node access"
+        },
+        "shelby.network": {
+          "type": "string",
+          "enum": [
+            "mainnet",
+            "testnet",
+            "devnet",
+            "shelbynet"
+          ],
+          "enumDescriptions": [
+            "Aptos Mainnet",
+            "Aptos Testnet",
+            "Aptos Devnet",
+            "Shelby Shelbynet"
+          ],
+          "default": "shelbynet",
+          "description": "Shelby network to connect to"
+        },
+        "shelby.accounts": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "title": "Account",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for this account"
+              },
+              "address": {
+                "type": "string",
+                "description": "Aptos account address (hex)"
+              },
+              "privateKey": {
+                "type": "string",
+                "description": "Private key (hex). Stored initially in settings, migrated to OS-level SecretStorage on extension activation for enhanced security."
+              }
+            },
+            "required": [
+              "name",
+              "address"
+            ]
+          },
+          "description": "Configured Shelby accounts. Private keys auto-migrated to OS-level encrypted SecretStorage."
+        },
+        "shelby.defaultAccount": {
+          "type": "string",
+          "default": "",
+          "description": "Default account name for operations"
+        },
+        "shelby.defaultExpirationDays": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 365,
+          "description": "Default blob expiration in days"
+        },
+        "shelby.concurrency": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Maximum concurrent upload/download operations"
+        },
+        "shelby.previewSizeKB": {
+          "type": "number",
+          "default": 100,
+          "minimum": 0,
+          "description": "Maximum size (KB) for text/blob preview. Set to 0 to disable previews."
+        },
+        "shelby.autoRefreshSeconds": {
+          "type": "number",
+          "default": 60,
+          "minimum": 10,
+          "maximum": 3600,
+          "description": "Auto-refresh interval for the Blob Explorer in seconds. Set to 0 to disable."
+        },
+        "shelby.urlFormat": {
+          "type": "string",
+          "enum": [
+            "shelby://",
+            "https://shelby.xyz/blob/",
+            "https://explorer.shelby.xyz/blob/"
+          ],
+          "default": "shelby://",
+          "description": "URL format used by Copy Blob URL command"
+        },
+        "shelby.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Shelby network, wallet, storage, and queue status"
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/typescript.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.0.0",
+    "@types/sinon": "^17.0.0",
+    "@types/vscode": "^1.96.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "mocha": "^11.0.0",
+    "sinon": "^19.0.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.60.1"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^5.0.0",
+    "@shelby-protocol/sdk": "^0.2.2",
+    "got": "^11.8.6"
+  }
+}

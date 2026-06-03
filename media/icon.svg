@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <rect width="128" height="128" rx="24" fill="#1a1a2e"/>
+  <g transform="translate(28, 28)">
+    <!-- Stylized "S" shape representing Shelby / Storage -->
+    <path d="M8 64 L8 8 L36 8 L36 36 L22 36 L22 22 L22 36 L22 64 Z"
+          fill="#00d4aa" opacity="0.9"/>
+    <path d="M36 64 L36 16 L52 16 L52 56 L64 56 L64 64 Z"
+          fill="#7c3aed" opacity="0.9"/>
+    <circle cx="58" cy="18" r="4" fill="#f59e0b"/>
+    <!-- Nodes representing decentralized network -->
+    <circle cx="8" cy="6" r="3" fill="#00d4aa"/>
+    <circle cx="20" cy="6" r="3" fill="#00d4aa"/>
+    <circle cx="32" cy="6" r="3" fill="#00d4aa"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Simplified Shelby "S" icon for activity bar (16x16 at 24x24 canvas) -->
+  <rect x="4" y="3" width="8" height="18" rx="2" fill="#00d4aa" opacity="0.7"/>
+  <rect x="12" y="6" width="8" height="3" rx="1" fill="#7c3aed" opacity="0.7"/>
+  <rect x="12" y="11" width="8" height="3" rx="1" fill="#7c3aed" opacity="0.7"/>
+  <rect x="12" y="16" width="8" height="3" rx="1" fill="#7c3aed" opacity="0.7"/>
+  <circle cx="16" cy="4" r="1.5" fill="#f59e0b"/>
+</svg>

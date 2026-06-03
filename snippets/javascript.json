@@ -1,0 +1,84 @@
+{
+  "Shelby Client Init": {
+    "prefix": "shelby-init",
+    "description": "Shelby: Initialize Client",
+    "body": [
+      "const { ShelbyNodeClient } = require('@shelby-protocol/sdk/node');",
+      "const { Account, Ed25519PrivateKey, Network } = require('@aptos-labs/ts-sdk');",
+      "",
+      "const client = new ShelbyNodeClient({",
+      "  network: Network.${1|MAINNET,TESTNET,DEVNET|},",
+      "  apiKey: process.env.SHELBY_API_KEY ?? '${2:YOUR_API_KEY}'",
+      "});"
+    ]
+  },
+  "Shelby Upload Blob": {
+    "prefix": "shelby-upload",
+    "description": "Shelby: Upload Blob",
+    "body": [
+      "const { readFileSync } = require('node:fs');",
+      "",
+      "const blobData = readFileSync('${1:./path/to/file}');",
+      "const signer = Account.fromPrivateKey({",
+      "  privateKey: new Ed25519PrivateKey(process.env.SHELBY_PRIVATE_KEY ?? '${2:PRIVATE_KEY}')",
+      "});",
+      "",
+      "const expirationMicros = BigInt(Date.now() + ${3:30} * 24 * 60 * 60 * 1000) * 1000n;",
+      "",
+      "await client.upload({",
+      "  blobData,",
+      "  signer,",
+      "  blobName: '${4:my-blob}',",
+      "  expirationMicros,",
+      "});"
+    ]
+  },
+  "Shelby Download Blob": {
+    "prefix": "shelby-download",
+    "description": "Shelby: Download Blob",
+    "body": [
+      "const { createWriteStream } = require('node:fs');",
+      "const { Readable } = require('node:stream');",
+      "const { pipeline } = require('node:stream/promises');",
+      "",
+      "const accountAddress = AccountAddress.fromString('${1:ACCOUNT_ADDRESS}');",
+      "",
+      "const { readable } = await client.download({",
+      "  account: accountAddress,",
+      "  blobName: '${2:my-blob}'",
+      "});",
+      "",
+      "// readable is a ReadableStream<Uint8Array>",
+      "await pipeline(Readable.fromWeb(readable), createWriteStream('${3:./output}'));"
+    ]
+  },
+  "Shelby List Blobs": {
+    "prefix": "shelby-list",
+    "description": "Shelby: List Blobs",
+    "body": [
+      "const address = AccountAddress.fromString('${1:ACCOUNT_ADDRESS}');",
+      "",
+      "const blobs = await client.coordination.getAccountBlobs({",
+      "  account: address,",
+      "});",
+      "",
+      "for (const blob of blobs) {",
+      "  console.log(`  \\${blob.name} — \\${blob.size} bytes`);",
+      "}"
+    ]
+  },
+  "Shelby Create Account": {
+    "prefix": "shelby-account",
+    "description": "Shelby: Create Account",
+    "body": [
+      "const { Account, AccountAddress, Ed25519PrivateKey } = require('@aptos-labs/ts-sdk');",
+      "",
+      "const account = Account.fromPrivateKey({",
+      "  privateKey: new Ed25519PrivateKey('${1:PRIVATE_KEY_HEX}')",
+      "});",
+      "",
+      "const address = account.accountAddress.toString();",
+      "console.log('Account address:', address);"
+    ]
+  }
+}
